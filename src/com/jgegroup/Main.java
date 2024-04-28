@@ -1,4 +1,4 @@
-package com.jgegroup.mapwriter;
+package com.jgegroup;
 
 import com.jgegroup.GameConfig.GameConfig;
 

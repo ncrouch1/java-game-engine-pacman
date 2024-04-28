@@ -5,14 +5,15 @@ import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class KeyHandler implements javafx.event.EventHandler<javafx.scene.input.KeyEvent>  {
+public class KeyHandler implements javafx.event.EventHandler<javafx.scene.input.KeyEvent> {
     public Direction movement = Direction.STOP;
+
     @Override
-    public void handle(javafx.scene.input.KeyEvent  keyEvent) {
+    public void handle(javafx.scene.input.KeyEvent keyEvent) {
         KeyCode keyCode = keyEvent.getCode();
         switch (keyCode) {
             case ESCAPE:
-              Platform.exit();
+                Platform.exit();
             case UP:
                 this.movement = Direction.UP;
                 break;

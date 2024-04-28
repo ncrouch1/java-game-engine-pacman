@@ -2,16 +2,16 @@ package com.jgegroup.pacman.objects;
 
 import java.util.HashMap;
 
-import com.jgegroup.pacman.legacy.Position;
+import com.jgegroup.pacman.Position;
 import com.jgegroup.pacman.objects.Enums.*;
-//import com.jgegroup.pacman.objects.characters.Pacman;
 import com.jgegroup.pacman.objects.immovable.Tile;
 
 
 public class MapUtils {
     public static final int tileSize = 32;
 
-    /** @@Authors: Noah, Jesse
+    /**
+     * @@Authors: Noah, Jesse
      * Gets the surrounding tiles from the map for a given position
      * Throws no Exceptions
      * Returns the surround tiles
@@ -25,53 +25,4 @@ public class MapUtils {
         surrounding.put(Direction.RIGHT, map.get(new Position(pos.getX() - 1, pos.getY())));
         return surrounding;
     }
-
-//    /** @@Authors: Noah, Jesse
-//     * Determines if a move is valid, if it is it sends back the next move
-//     * Throws no exceptions
-//     * Returns a move
-//     * Takes in the object, and the surrounding tiles
-//     */
-//    public static Direction moveValid(MovingObject object, HashMap<Direction, Tile> surr) {
-//        if (object instanceof Pacman) {
-//            if (((Pacman)object).nextMove != Direction.STOP) {
-//                Direction nextDir = ((Pacman) object).nextMove;
-//                return validateMove(nextDir, surr);
-//            }
-//        }
-//        Direction dir = object.direction;
-//        return validateMove(dir, surr);
-//    }
-//
-//    /** @@Authors: Noah, Jesse
-//     * Translates the screen tile position to the world position size
-//     * Throws no exceptions
-//     * Returns a new position with the world position
-//     * Takes in screen position
-//     */
-//    public static Position screenToWorld(Position pos) {
-//        return new Position(pos.getX()*tileSize, pos.getY()*tileSize);
-//    }
-//
-//    /** @@Authors: Noah, Jesse
-//     * Translates the world position to the screen tile position
-//     * Throws no exceptions
-//     * Returns a new position with the screen tile position
-//     * Takes in a world position
-//     */
-//    public static Position worldToScreen(Position pos) {
-//        return new Position(pos.getX() / tileSize, pos.getY() / tileSize);
-//    }
-//
-//    /**
-//     * @@Authors: Noah
-//     * @param dir - input direction
-//     * @param surr - hashmap of surrounding tiles
-//     * @return
-//     */
-//    public static Direction validateMove(Direction dir, HashMap<Direction, Tile> surr) {
-//        if (surr.get(dir) instanceof Wall)
-//            return Direction.STOP;
-//        return dir;
-//    }
 }

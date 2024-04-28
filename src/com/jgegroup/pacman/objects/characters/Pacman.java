@@ -4,8 +4,6 @@ import com.jgegroup.pacman.KeyHandler;
 import com.jgegroup.pacman.GameScene;
 import com.jgegroup.pacman.objects.Entity;
 import com.jgegroup.pacman.objects.Enums.*;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
@@ -15,8 +13,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 
-public class Pac extends Entity {
-
+public class Pacman extends Entity {
     private GameScene gameScene;
     private KeyHandler keyHandler;
     int life;
@@ -31,7 +28,8 @@ public class Pac extends Entity {
     private final MediaPlayer ghostSiren = new MediaPlayer(sirenMedia);
     private final Media chompMedia = new Media(new File("res/sounds/pacman_chomp.wav").toURI().toString());
     private final MediaPlayer chomp = new MediaPlayer(chompMedia);
-    public Pac(GameScene gameScene, KeyHandler keyHandler) {
+
+    public Pacman(GameScene gameScene, KeyHandler keyHandler) {
         this.gameScene = gameScene;
         this.keyHandler = keyHandler;
         last_time = System.currentTimeMillis();
@@ -58,22 +56,24 @@ public class Pac extends Entity {
     public void setLife(int life) {
         this.life = life;
     }
+
     public void initialize() {
-      setPacImage();
-      spriteImage = pacZero;
-      spriteNumber = 1;
-      life = 3;
-      point = 0;
-      collidedGhost = false;
-      spawn();
-      speed = 1;
-      collision_range = new Rectangle(0, 0, GameScene.TILE_SIZE - 1, GameScene.TILE_SIZE - 1);
+        setPacImage();
+        spriteImage = pacZero;
+        spriteNumber = 1;
+        life = 3;
+        point = 0;
+        collidedGhost = false;
+        spawn();
+        speed = 1;
+        collision_range = new Rectangle(0, 0, GameScene.TILE_SIZE - 1, GameScene.TILE_SIZE - 1);
     }
 
 
-  /** @@Author: Tung
-   * Pacman update(), update movement, direction, collision, and events.
-   */
+    /**
+     * @@Author: Tung
+     * Pacman update(), update movement, direction, collision, and events.
+     */
     public void update() {
         setNewDirection(keyHandler.movement);
         setCurrentDirection(newDirection);
@@ -87,8 +87,8 @@ public class Pac extends Entity {
 
         spriteCounter++;
         if (spriteCounter > 10) {
-          this.spriteNumber = spriteNumber == 1 ? 2: 1;
-          spriteCounter = 0;
+            this.spriteNumber = spriteNumber == 1 ? 2 : 1;
+            spriteCounter = 0;
         }
 
         if (isSuper()) {
@@ -104,32 +104,36 @@ public class Pac extends Entity {
             chomp.stop();
     }
 
-  /** @@Author: Tung
-   * Pacman's redraw(), draw Pac image.
-   */
-  public void redraw(GraphicsContext painter) {
-    if (painter != null) {
-      updateImage();
-      painter.drawImage(spriteImage, x, y, GameScene.TILE_SIZE, GameScene.TILE_SIZE);
+    /**
+     * @@Author: Tung
+     * Pacman's redraw(), draw Pac image.
+     */
+    public void redraw(GraphicsContext painter) {
+        if (painter != null) {
+            updateImage();
+            painter.drawImage(spriteImage, x, y, GameScene.TILE_SIZE, GameScene.TILE_SIZE);
+        }
     }
-  }
 
-  /** @@Author: Tung, Noah, Ethan
-   * Check Pacman & Dot collision.
-   */
-  public void eatDot() {
-      int current_column = x / GameScene.TILE_SIZE;
-      int current_row = y / GameScene.TILE_SIZE;
-      if (gameScene.map.mapArray2D[current_column][current_row] == 0) {
-          gameScene.map.mapArray2D[current_column][current_row] = 2;
-          point += 10;
-      } else if (gameScene.map.mapArray2D[current_column][current_row] == 3) {
-          gameScene.map.mapArray2D[current_column][current_row] = 2;
-          point += 100;
-          setSuper();
-      }
-  }
-    /** @@Author Noah
+    /**
+     * @@Author: Tung, Noah, Ethan
+     * Check Pacman & Dot collision.
+     */
+    public void eatDot() {
+        int current_column = x / GameScene.TILE_SIZE;
+        int current_row = y / GameScene.TILE_SIZE;
+        if (gameScene.map.mapArray2D[current_column][current_row] == 0) {
+            gameScene.map.mapArray2D[current_column][current_row] = 2;
+            point += 10;
+        } else if (gameScene.map.mapArray2D[current_column][current_row] == 3) {
+            gameScene.map.mapArray2D[current_column][current_row] = 2;
+            point += 100;
+            setSuper();
+        }
+    }
+
+    /**
+     * @@Author Noah
      * Sets the super state
      * @Throws no exceptions
      * @Returns nothing
@@ -147,7 +151,8 @@ public class Pac extends Entity {
             this.Super += length;
     }
 
-    /** @@Author: Noah
+    /**
+     * @@Author: Noah
      * Updates the super state
      * @Throws no exceptions
      * @Returns true if the pacman is super, else false
@@ -161,32 +166,41 @@ public class Pac extends Entity {
         return false;
     }
 
-    /** @@Author: Noah
+    /**
+     * @@Author: Noah
      * Checks to see if Pacman is super
      * @Throws no exceptions
      * @Returns true if super state container is greater than or equal to 0, else false
      * Takes in no parameters
      */
-    public boolean isSuper() { return this.Super >= 0; }
+    public boolean isSuper() {
+        return this.Super >= 0;
+    }
 
-    /** @@Author: Noah
-     * Gets the remaining super cycles
-     * Throws no exceptions
+    /**
      * @return Integer denoting how many super cycles are left
      * Takes in no parameters
+     * @@Author: Noah
+     * Gets the remaining super cycles
+     * Throws no exceptions
      */
-    public int getSuper() { return this.Super; }
+    public int getSuper() {
+        return this.Super;
+    }
 
-    /** @@Author: Noah
+    /**
+     * @@Author: Noah
      * Gets num of lives left
      * @Throws no exceptions
      * @Returns number of lives left
      * Takes in no parameters
      */
-    public int getLives() { return this.life; }
+    public int getLives() {
+        return this.life;
+    }
 
     public int getPoint() {
-      return point;
+        return point;
     }
 
     public synchronized void death() {
@@ -195,11 +209,12 @@ public class Pac extends Entity {
         //setSuper(3);
     }
 
-  /** @@Author: Tung
-   * Set pacman's position back to spawn position.
-   */
+    /**
+     * @@Author: Tung
+     * Set pacman's position back to spawn position.
+     */
     public void spawn() {
-      spawn(10,15);
+        spawn(10, 15);
     }
 
     public void spawn(int tile_x, int tile_y) {
@@ -211,9 +226,10 @@ public class Pac extends Entity {
         chomp.seek(Duration.ZERO);
     }
 
-  /** @@Author: Tung, Iman
-   * Set new (next) key input from keyboard. See setCurrentDirection()
-   */
+    /**
+     * @@Author: Tung, Iman
+     * Set new (next) key input from keyboard. See setCurrentDirection()
+     */
     public void setNewDirection(Direction key) {
         switch (key) {
             case UP:
@@ -233,18 +249,20 @@ public class Pac extends Entity {
         }
     }
 
-  /** @@Author: Tung, Iman
-   * Check newDirection repeatedly in update(). Change direction(currentDirection) to newDirection whenever newDirection is valid to change.
-   */
+    /**
+     * @@Author: Tung, Iman
+     * Check newDirection repeatedly in update(). Change direction(currentDirection) to newDirection whenever newDirection is valid to change.
+     */
     public void setCurrentDirection(Direction newDirection) {
-      if (!gameScene.collisionChecker.isValidDirection(this, newDirection)) {
-        direction = newDirection;
-      }
+        if (!gameScene.collisionChecker.isValidDirection(this, newDirection)) {
+            direction = newDirection;
+        }
     }
 
-  /** @@Author: Tung
-   * Change pacman position accordingly to currentDirection, depend on speed.
-   */
+    /**
+     * @@Author: Tung
+     * Change pacman position accordingly to currentDirection, depend on speed.
+     */
     public void updatePosition(boolean collisionDetected) {
         if (!collisionDetected) {
             switch (direction) {
@@ -266,44 +284,46 @@ public class Pac extends Entity {
         }
     }
 
-  /** @@Author: Tung
-   * Change pacman's spriteImage accordingly to spriteNum.
-   */
+    /**
+     * @@Author: Tung
+     * Change pacman's spriteImage accordingly to spriteNum.
+     */
     public void updateImage() {
-      switch (direction) {
-        case UP:
-          this.spriteImage = this.spriteNumber == 1 ? up1: up2;
-          break;
-        case DOWN:
-          this.spriteImage = this.spriteNumber == 1 ? down1: down2;
-          break;
-        case LEFT:
-          this.spriteImage = this.spriteNumber == 1 ? left1: left2;
-          break;
-        case RIGHT:
-          this.spriteImage = this.spriteNumber == 1 ? right1: right2;
-          break;
-        default:
-          break;
-      }
+        switch (direction) {
+            case UP:
+                this.spriteImage = this.spriteNumber == 1 ? up1 : up2;
+                break;
+            case DOWN:
+                this.spriteImage = this.spriteNumber == 1 ? down1 : down2;
+                break;
+            case LEFT:
+                this.spriteImage = this.spriteNumber == 1 ? left1 : left2;
+                break;
+            case RIGHT:
+                this.spriteImage = this.spriteNumber == 1 ? right1 : right2;
+                break;
+            default:
+                break;
+        }
     }
 
-    public void setSpeed(int newSpeed)  {
-      speed = newSpeed;
+    public void setSpeed(int newSpeed) {
+        speed = newSpeed;
     }
 
-  /** @@Author: Tung
-   * Load sprite image for Pacman.
-   */
+    /**
+     * @@Author: Tung
+     * Load sprite image for Pacman.
+     */
     public void setPacImage() {
-      pacZero = new Image("pac/pacman_0.png");
-      up1 = new Image("pac/pacman_up1.png");
-      up2 = new Image("pac/pacman_up2.png");
-      down1 = new Image("pac/pacman_down1.png");
-      down2 = new Image("pac/pacman_down2.png");
-      left1 = new Image("pac/pacman_left1.png");
-      left2 = new Image("pac/pacman_left2.png");
-      right1 = new Image("pac/pacman_right1.png");
-      right2 = new Image("pac/pacman_right2.png");
+        pacZero = new Image("pac/pacman_0.png");
+        up1 = new Image("pac/pacman_up1.png");
+        up2 = new Image("pac/pacman_up2.png");
+        down1 = new Image("pac/pacman_down1.png");
+        down2 = new Image("pac/pacman_down2.png");
+        left1 = new Image("pac/pacman_left1.png");
+        left2 = new Image("pac/pacman_left2.png");
+        right1 = new Image("pac/pacman_right1.png");
+        right2 = new Image("pac/pacman_right2.png");
     }
 }

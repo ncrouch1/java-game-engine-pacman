@@ -11,26 +11,27 @@ import java.util.Set;
 
 public class GhostMovement {
     private Color color;
-    private Pac pac;
+    private Pacman pacman;
     private Ghost ghost;
     private Random random;
     private PathFinder pf;
-    public GhostMovement(Color color, Pac pac, Ghost ghost) {
+
+    public GhostMovement(Color color, Pacman pacman, Ghost ghost) {
         this.color = color;
-        this.pac = pac;
-        pf = new PathFinder(Map.getMapInstance(), pac);
+        this.pacman = pacman;
+        pf = new PathFinder(Map.getMapInstance(), pacman);
         this.ghost = ghost;
     }
 
     public Direction chase(Set<Direction> restrictions) {
         if (color.equals(Color.RED)) {
-            return pf.redChase(ghost.x, ghost.y, pac.x, pac.y, restrictions);
+            return pf.redChase(ghost.x, ghost.y, pacman.x, pacman.y, restrictions);
         } else if (color.equals(Color.BLUE)) {
-            return pf.blueChase(ghost.x, ghost.y, pac.x, pac.y, restrictions);
+            return pf.blueChase(ghost.x, ghost.y, pacman.x, pacman.y, restrictions);
         } else if (color.equals(Color.PINK)) {
-            return pf.pinkChase(ghost.x, ghost.y, pac.x, pac.y, restrictions);
+            return pf.pinkChase(ghost.x, ghost.y, pacman.x, pacman.y, restrictions);
         } else if (color.equals(Color.YELLOW)) {
-            return pf.yellowChase(ghost.x, ghost.y, pac.x, pac.y, restrictions);
+            return pf.yellowChase(ghost.x, ghost.y, pacman.x, pacman.y, restrictions);
         }
         return Direction.STOP;
     }
@@ -49,7 +50,7 @@ public class GhostMovement {
     }
 
     public Direction spooked(Set<Direction> restrictions) {
-        return pf.spook(ghost.x, ghost.y, pac.x, pac.y, restrictions);
+        return pf.spook(ghost.x, ghost.y, pacman.x, pacman.y, restrictions);
     }
 
     public Direction spawn(Set<Direction> restrictions) {
