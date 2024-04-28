@@ -2,24 +2,19 @@ package com.jgegroup.pacman.objects;
 
 import com.jgegroup.GameConfig.config.Settings;
 import com.jgegroup.pacman.GameScene;
-import com.jgegroup.pacman.legacy.Position;
+import com.jgegroup.pacman.Position;
 import com.jgegroup.pacman.objects.immovable.Tile;
 //import com.jgegroup.pacman.legacy.consumables.Consumable;
 import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
-import javax.management.ImmutableDescriptor;
 
 
 public class Map {

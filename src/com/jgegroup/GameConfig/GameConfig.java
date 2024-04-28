@@ -48,7 +48,6 @@ public class GameConfig extends Application {
         this.stage = stage;
         settings = new Settings();
 
-
         TabPane tabPane = new TabPane();
         tabPane.setSide(Side.TOP);
         Tab tab1 = new Tab("Game Settings");
@@ -67,7 +66,9 @@ public class GameConfig extends Application {
         stage.setResizable(true);
         stage.setTitle("JGE Settings");
         stage.centerOnScreen();
-
+        stage.setOnCloseRequest((var) -> {
+            System.exit(0);
+        });
         stage.show();
     }
 
@@ -134,8 +135,6 @@ public class GameConfig extends Application {
                 stage.setScene(scene.gameScene);
                 stage.show();
                 scene.startThread();
-
-
             }
         };
 
@@ -205,7 +204,6 @@ public class GameConfig extends Application {
             }
         }
         wallBox.setItems(FXCollections.observableArrayList(wallPaths));
-
 
 
         wallBox.setOnAction(event -> {
@@ -398,7 +396,7 @@ public class GameConfig extends Application {
             });
         });
         // change the currently working map.
-        current_map = new Map(newMapName , vertical_length, horizontal_length);
+        current_map = new Map(newMapName, vertical_length, horizontal_length);
     }
 
     class TileListCell extends ListCell<String> {
@@ -454,17 +452,17 @@ public class GameConfig extends Application {
                     newView.setFitHeight(fitsize);
                     if (mapArray[i][j] == Map.DOT) {
                         newView.setImage(dot);
-                    } else if (mapArray[i][j] == Map.WALL){
+                    } else if (mapArray[i][j] == Map.WALL) {
                         newView.setImage(wall);
-                    }  else if (mapArray[i][j] == Map.FLOOR){
+                    } else if (mapArray[i][j] == Map.FLOOR) {
                         newView.setImage(floor);
-                    } else if (mapArray[i][j] == Map.BIGDOT){
+                    } else if (mapArray[i][j] == Map.BIGDOT) {
                         newView.setImage(bigDot);
                     }
                     int finalI = i;
                     int finalJ = j;
                     //If on the border, no event registered.
-                    if(!(i==0||j==0||i==height-1||j==width-1)) {
+                    if (!(i == 0 || j == 0 || i == height - 1 || j == width - 1)) {
                         newView.setOnMouseEntered(event -> {
                             if (event.isShiftDown()) {
                                 if (picker.getValue() == Map.DOT) {

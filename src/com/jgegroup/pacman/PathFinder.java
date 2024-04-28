@@ -2,18 +2,18 @@ package com.jgegroup.pacman;
 
 import com.jgegroup.pacman.objects.Enums.Direction;
 import com.jgegroup.pacman.objects.Map;
-import com.jgegroup.pacman.objects.characters.Pac;
+import com.jgegroup.pacman.objects.characters.Pacman;
 
 import java.util.*;
 
 public class PathFinder {
 
     private Map map;
-    private Pac pac;
+    private Pacman pacman;
     private List<Direction> priorities = List.of(Direction.UP, Direction.RIGHT, Direction.DOWN, Direction.LEFT);
-    public PathFinder(Map map, Pac pac) {
+    public PathFinder(Map map, Pacman pacman) {
         this.map = map;
-        this.pac = pac;
+        this.pacman = pacman;
     }
 
     public Direction redChase(
@@ -86,7 +86,7 @@ public class PathFinder {
         int pac_map_x = (int) Math.ceil(pac_x / GameScene.TILE_SIZE);
         int pac_map_y = (int) Math.ceil(pac_y / GameScene.TILE_SIZE);
 
-        switch (pac.direction) {
+        switch (pacman.direction) {
             case RIGHT -> pac_map_x += 2;
             case LEFT -> pac_map_x -= 2;
             case UP -> pac_map_y -= 2;
@@ -149,7 +149,7 @@ public class PathFinder {
         int pac_map_x = (int) Math.ceil(pac_x / GameScene.TILE_SIZE);
         int pac_map_y = (int) Math.ceil(pac_y / GameScene.TILE_SIZE);
 
-        switch (pac.direction) {
+        switch (pacman.direction) {
             case RIGHT -> pac_map_x += 2;
             case LEFT -> pac_map_x -= 2;
             case UP -> {

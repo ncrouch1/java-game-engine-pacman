@@ -5,21 +5,16 @@ import com.jgegroup.pacman.objects.Map;
 
 import com.jgegroup.pacman.objects.UI;
 import com.jgegroup.pacman.objects.characters.Ghost;
-import com.jgegroup.pacman.objects.characters.Pac;
+import com.jgegroup.pacman.objects.characters.Pacman;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Slider;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.Canvas;
-import javafx.geometry.Pos;
 
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.util.Duration;
 
 import java.io.File;
 
@@ -49,7 +44,7 @@ public class GameScene implements Runnable {
 
     public Map map;
     private KeyHandler keyHandler;
-    private Pac pac;
+    private Pacman pacman;
     private Ghost[] ghosts;
     private Color[] colors = {Color.RED, Color.BLUE, Color.YELLOW, Color.PINK};
 
@@ -110,12 +105,12 @@ public class GameScene implements Runnable {
         map.createMap(settings);
         collisionChecker = new CollisionChecker(map);
 
-        pac = new Pac(this, keyHandler);
+        pacman = new Pacman(this, keyHandler);
 
         ghosts = new Ghost[ghostNumber];
 
         for (int i = 0; i < ghostNumber; i++) {
-            ghosts[i] = new Ghost(10, this, colors[i % colors.length], pac);
+            ghosts[i] = new Ghost(10, this, colors[i % colors.length], pacman);
             ghosts[i].setSpawnPosition(9, 8 + i % colors.length);
         }
     }
@@ -133,21 +128,21 @@ public class GameScene implements Runnable {
         long wait = start + 4000;
         for (Ghost ghost : ghosts)
             ghost.setSpeed(0);
-        pac.setSpeed(0);
+        pacman.setSpeed(0);
         redraw();
         while (start < wait) {
             start = System.currentTimeMillis();
         }
         if (settings.selectedLives())
-            pac.setLife(settings.getPacmanLives());
+            pacman.setLife(settings.getPacmanLives());
         if (settings.selectedPacmanSpeed())
-            pac.setSpeed(settings.getPacmanSpeed());
+            pacman.setSpeed(settings.getPacmanSpeed());
         if (settings.selectedGhostSpeed()) {
             for (int i = 0; i < ghostNumber; i++) {
                 ghosts[i].setSpeed(settings.getGhostSpeed());
             }
         }
-        while (pac.getLives() >= 0) {
+        while (pacman.getLives() >= 0) {
             update();
             redraw();
             controlFPS(); // DANGER!!!  REMOVE THIS CAUSE ATOMIC EXPLOSION
@@ -162,7 +157,7 @@ public class GameScene implements Runnable {
      * Main game's update(), control entities update().
      */
     public void update() {
-        pac.update();
+        pacman.update();
         for (Ghost ghost : ghosts) {
             ghost.update();
         }
@@ -179,7 +174,7 @@ public class GameScene implements Runnable {
             public void run() {
                 map.drawMap(getGamePainter());
                 map.drawDot(getGamePainter());
-                pac.redraw(getGamePainter());
+                pacman.redraw(getGamePainter());
                 for (int i = 0; i < ghosts.length; i++) {
                     ghosts[i].redraw(getGamePainter());
                 }
@@ -218,11 +213,11 @@ public class GameScene implements Runnable {
     // Encapsulation
 
     public int getPacLives() {
-        return pac.getLives();
+        return pacman.getLives();
     }
 
     public int getPoints() {
-        return pac.getPoint();
+        return pacman.getPoint();
     }
 
     public Canvas getCanvas() {
