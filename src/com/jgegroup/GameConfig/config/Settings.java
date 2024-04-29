@@ -2,6 +2,9 @@ package com.jgegroup.GameConfig.config;
 
 import javafx.scene.image.Image;
 
+/**
+ * The settings object used by the game engine
+ */
 public class Settings {
     private Integer pacmanLives = null;
     private Integer pacmanSpeed = null;

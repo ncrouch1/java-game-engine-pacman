@@ -32,6 +32,11 @@ public class GameConfig extends Application {
     public int vertical_length; // For it to work with lambda ex
     public static Map current_map;
 
+
+    /**
+     * Another optional entry point of program, pass params to game
+     * @param args arguments passed to the program
+     */
     public static void main(String[] args) {
         launch(args);
     }
