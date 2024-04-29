@@ -20,9 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.IntBuffer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -158,7 +156,7 @@ public class GameConfig extends Application {
         floorBox.setPrefWidth(258);
         floorBox.relocate(525, 50);
 
-        File floorDir = new File("res/tiles/floor tiles");
+        File floorDir = new File("res/tiles/floor_tiles");
         File[] floors = floorDir.listFiles();
 
         List<Image> floorImagesList = new ArrayList<>();
@@ -172,8 +170,8 @@ public class GameConfig extends Application {
             for (int i = 0; i < floors.length; i++) {
                 String name = floors[i].getName();
                 int pos = name.lastIndexOf('.');
-                Image image = new Image("tiles/floor tiles/" + floors[i].getName());
-                floorPaths.add("tiles/floor tiles/" + floors[i].getName());
+                Image image = new Image("tiles/floor_tiles/" + floors[i].getName());
+                floorPaths.add("tiles/floor_tiles/" + floors[i].getName());
                 floorImagesList.add(image);
             }
         }
@@ -190,7 +188,7 @@ public class GameConfig extends Application {
         wallBox.setPrefWidth(258);
         wallBox.relocate(525, 100);
 
-        File wallDir = new File("res/tiles/wall tiles");
+        File wallDir = new File("res/tiles/wall_tiles");
         File[] walls = wallDir.listFiles();
         wallBox.setCellFactory(param -> new TileListCell());
         wallBox.setButtonCell(new TileListCell());
@@ -198,8 +196,8 @@ public class GameConfig extends Application {
             for (int i = 0; i < walls.length; i++) {
                 String name = walls[i].getName();
                 int pos = name.lastIndexOf('.');
-                Image image = new Image("tiles/wall tiles/" + walls[i].getName());
-                wallPaths.add("tiles/wall tiles/" + walls[i].getName());
+                Image image = new Image("tiles/wall_tiles/" + walls[i].getName());
+                wallPaths.add("tiles/wall_tiles/" + walls[i].getName());
                 wallImagesList.add(image);
             }
         }
@@ -251,19 +249,19 @@ public class GameConfig extends Application {
             ScrollPane scrollPane = new ScrollPane();
             TilePickerButton tilePickerButton = new TilePickerButton(0,
                     settings.selectedFloorImage() ?
-                            settings.getFloorImage() : new Image("tiles/floor tiles/floor.png"),
+                            settings.getFloorImage() : new Image("tiles/floor_tiles/floor.png"),
                     settings.selectedWallImage() ?
-                            settings.getWallImage() : new Image("tiles/wall tiles/wall.png"),
+                            settings.getWallImage() : new Image("tiles/wall_tiles/wall.png"),
                     settings.selectedFloorImage() ?
-                            settings.getFloorImage() : new Image("tiles/floor tiles/floor.png"),
+                            settings.getFloorImage() : new Image("tiles/floor_tiles/floor.png"),
                     settings.selectedFloorImage() ?
-                            settings.getFloorImage() : new Image("tiles/floor tiles/floor.png"));
+                            settings.getFloorImage() : new Image("tiles/floor_tiles/floor.png"));
             tilePickerButton.relocate(15, 100);
             TilePane tilePane = new TilePane(current_map.getArrayMap(),
                     settings.selectedFloorImage() ?
-                            settings.getFloorImage() : new Image("tiles/floor tiles/floor.png"),
+                            settings.getFloorImage() : new Image("tiles/floor_tiles/floor.png"),
                     settings.selectedWallImage() ?
-                            settings.getWallImage() : new Image("tiles/wall tiles/wall.png"),
+                            settings.getWallImage() : new Image("tiles/wall_tiles/wall.png"),
                     tilePickerButton);
             scrollPane.setContent(tilePane);
             tilePane.setPrefHeight(800);

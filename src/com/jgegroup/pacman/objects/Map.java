@@ -55,10 +55,10 @@ public class Map {
     public void createMap(Settings settings) {
         Image floor = settings.selectedFloorImage() ?
                 settings.getFloorImage() :
-                new Image("tiles/floor tiles/floor.png");
+                new Image("tiles/floor_tiles/floor.png");
         Image wall = settings.selectedWallImage() ?
                 settings.getWallImage() :
-                new Image("tiles/wall tiles/wall.png");
+                new Image("tiles/wall_tiles/wall.png");
         loadTileImage(floor, wall);
         System.out.println(settings.selectedMap() ? settings.getMapPath() : "");
         readMap(settings.selectedMap() ? settings.getMapPath() : "res/maps/map1.txt");
